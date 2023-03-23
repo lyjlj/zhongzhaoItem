@@ -1,0 +1,14 @@
+/* 
+.imgContainer {
+    animation: scroll 5s linear infinite;
+    background-color: green;
+}
+
+@keyframes scroll {
+    from  {
+        left:  0px,
+    }
+    to {
+        left: -100px;
+    }
+} */
