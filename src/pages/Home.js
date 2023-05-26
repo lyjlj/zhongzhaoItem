@@ -15,12 +15,12 @@ const IMG = [
     {
         "url":require("../resource/home_cards/企业简介.png"),
         link : "introduce",
-        bg : require("../resource/home_cards/企业简介bg3-23.png")
+        bg : require("../resource/home_cards/企业简介bg3-24.png")
     },
     {
         "url": require("../resource/home_cards/发展历程.png"),
         "link": "development",
-        "bg":require("../resource/home_cards/发展历程bg3-23.png"),
+        "bg":require("../resource/home_cards/发展历程bg3-24.jpg"),
     },
     {
         "url": require("../resource/home_cards/旗下基金.png"),
@@ -63,7 +63,7 @@ export default () => {
             }
         }, 5000);
     },[])
-
+    
     
     return (
         <div style={{
@@ -97,7 +97,7 @@ export default () => {
                 </Link>
             </div>
             {/* 轮播图 */}
-            <div style={{ width: "848px", height: "50%", position: "relative" }}>
+            <div style={{ width: "848px", height: "450px", position: "relative" }}>
                 <div style={{ display: "flex", height: "70%" }} className={styles.imgContainer}>
                     {/* {
                     IMG.map(item => {
@@ -129,7 +129,9 @@ export default () => {
                     >
                         {
                             IMG.map((item,index) => {
-                                return <SwiperSlide key={index}  style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><img  style={{objectFit:"cover",  borderRadius: 20, width: "100%", height: "100%", }} src={item.url} onClick={() => { window.location.href = item.link }} /></SwiperSlide>
+                                return <SwiperSlide key={index}  style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                    <img  style={{objectFit:"cover",  borderRadius: 20, width: "100%", height: "100%", }} src={item.url} onClick={() => { window.location.href = item.link }} />
+                                    </SwiperSlide>
                                 // return <img  style={{objectFit:"cover",  borderRadius: 20, width: "100%", height: "100%", }} src={item.url} onClick={() => { window.location.href = item.link }} />
                             })
                         }
@@ -153,7 +155,7 @@ export default () => {
                             <img src={require("../resource/组 9.png")} style={{width:"100%",height:"100%"}}/>
                         </div>
                     </div>
-                    <div style={{ width: 50 }}></div>
+                    <div style={{ width: 100 }}></div>
                     {/* 指示条 */}
                     <div style={{ display: "flex", flex: 1, }}>
                         <div style={{ width: "90%", height: 2, backgroundColor: "white", position: "relative" }}>

@@ -1,5 +1,8 @@
 import Card from "./card"
 import Wrapper from "./wrapper"
+import {useEffect,useState} from 'react'
+// import axios from 'axios';
+import {requestActivty} from '../service/page/index'
 
 
 const DATA = [
@@ -18,32 +21,55 @@ const DATA = [
         linkMore : "https://mp.weixin.qq.com/s/4mE0BYoY_p1yGrhHdzW_mw"
     },
     {
-        img:require("../resource/dongtai/中钊动态_08.png"),
-        title :"中钊资本参与投资显示芯片设计领先企业",
-        desc : "  四月，国内大尺寸液晶面板驱动芯片设计领先企业——深圳通锐微电子技术有限公司，完成超亿元融资。本轮融资由中电信基金、湖州芮智、联通中金...",
-        date : "2021.07.22",
-        linkMore : "https://mp.weixin.qq.com/s/5SwVjDUwB2xT4bqBdsDQyg"
-    },
-    {
         img:require("../resource/dongtai/中钊动态_10.png"),
         title :"来画发布大众版数字人智能创作平台，开启「数字人自由」时代",
         desc : "自2021年元宇宙“爆炸”后，资本和巨头的狂热追逐，将我们带向一个崭新的虚拟平行世界。据彭博行业研究预计，元宇宙市场规模将在2024年达到8000亿美元...",
         date : "2022.08.10",
         linkMore : "https://mp.weixin.qq.com/s/lpa-mAI8zYQ_lDYNrtfoiA"
+    },
+    {
+        img:require("../resource/dongtai/中钊动态_08.png"),
+        title :"中钊资本参与投资显示芯片设计领先企业",
+        desc : "  四月，国内大尺寸液晶面板驱动芯片设计领先企业——深圳通锐微电子技术有限公司，完成超亿元融资。本轮融资由中电信基金、湖州芮智、联通中金...",
+        date : "2021.07.22",
+        linkMore : "https://mp.weixin.qq.com/s/5SwVjDUwB2xT4bqBdsDQyg"
     }
 
 ]
 
 export default ()=>{
+    
+    const [trendsData, setTrendsData] = useState([]);
+    useEffect(()=>{
+        // axios.get("https://spapi.zhuanyegou.com/api/values?action=BusinessDetails_GetList&businessid=8").then(res => {
+            requestActivty().then(res => {
+                console.log("res的值",res)
+            // const trendsData = res.data.data.map(item => {
+            //     return JSON.parse(item.detaildatajson)
+            // })
+            const trendsData = res.data.filter((item,index) => {
+                return index<4
+            }).map(item1 => {
+                return JSON.parse(item1.detaildatajson)
+            }).map(item2=>{
+                return  {
+                    ...item2,
+                    date: item2.date.split('T')[0]
+                }
+            })
+            setTrendsData(trendsData)
+        })
+    },[])
     return (
         <Wrapper banner={require("../resource/zzdt.png")}>
             <Card title="中钊动态" subTitle="NEWS" backgroundColor="#F3F7FD">
                 <div style={{width:"100%"}}>
                     {
-                        DATA.map(i=>{
+                        trendsData.map((i,x)=>{
                             return (
-                                <div style={{display:"flex",padding:10,backgroundColor:"white",marginBottom:20}} onClick={()=>window.open(i.linkMore)}>
-                                    <img style={{width:250,height:150}} src={i.img}/>
+                                <div style={{display:"flex",padding:10,backgroundColor:"white",marginBottom:20}} onClick={()=>window.location.href = i.linkMore} key={x} >
+                                    <img style={{width:250,height:150}} src={i.img[0] ? i.img[0].url : i.img}/>
+                                    {/* <img style={{width:250,height:150}} src={i.img}/> */}
                                     <div style={{display:"flex",flex:1,flexDirection:"column",marginLeft:20,paddingTop:10}}>
                                         <div style={{display:"flex",justifyContent:"space-between"}}>
                                             {/* 标题 */}
@@ -55,11 +81,10 @@ export default ()=>{
                                         <div style={{wordSpacing:10,marginTop:10,color:"#8E8E8E",lineHeight:"22px",whiteSpace:"10",fontSize:"15px"}}>
                                             {i.desc}
                                         </div>
-                                        {/* 查看更丢哦 */}
+                                        {/* 查看更多哦 */}
                                         <div style={{marginTop:20}}>
                                             <span style={{border:"1px solid #D2D2D2", borderRadius:"5px",color:"#D2D2D2",padding:"3px 8px 3px 8px",fontSize:14}}>查看更多{" >"}</span>
                                         </div>
-                                        
                                     </div> 
                                 </div>
                             )
