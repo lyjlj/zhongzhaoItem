@@ -57,6 +57,9 @@ class HYRequest{
   get (config){
     return this.request({...config,method:'GET'})
   }
+  post(config){
+    return this.request({...config,method:'POST'})
+  }
   
 }
 export default HYRequest
