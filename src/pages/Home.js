@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import styles from "./home.module.css"
+import { Thumbs } from 'swiper'
 
 import { Swiper, SwiperSlide,  } from 'swiper/react';
 // import 'swiper/swiper-bundle.css';
@@ -52,6 +53,7 @@ export default () => {
     const [currentIndex, setCurrentIndex] = useState(1);
     const [ai, setAi] = useState(1);
     const indexWidth = 100 / IMG.length
+    const [thumbsSwiper,setThumbsSwiper] =  useState(null);
     const swiper = useRef()
 
     document.title="中钊资本"
@@ -107,16 +109,19 @@ export default () => {
                     })
                 } */}
                     <Swiper
+                        style={{touchAction:"pan-x"}}
                         id="filmswiper"
                         spaceBetween={20}
                         slidesPerView={3.5}
                         loop
+                        modules={[Thumbs]} 
+                        thumbs={{ swiper: thumbsSwiper }}
                         loopedSlides={IMG.length}
-                        
                         onSwiper={(s)=>{
                             console.log("log from on swiper")
                             swiper.current = s;
                         }}
+
                         autoplay={true}
                         onSlideChange={(v) => {
                             const newIndex = (v?.activeIndex % IMG.length);
