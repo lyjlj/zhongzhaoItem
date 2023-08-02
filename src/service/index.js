@@ -13,6 +13,7 @@ const hyRequest = new HYRequest({
       responseInterceptor: (res) => {
         return res
       },
+      
       responseInterceptorCatch: (err) => {
         return err
       }

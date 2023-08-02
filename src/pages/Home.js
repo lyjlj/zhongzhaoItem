@@ -99,7 +99,7 @@ export default () => {
                 </Link>
             </div>
             {/* 轮播图 */}
-            <div style={{ width: "848px", height: "450px", position: "relative" }}>
+            <div style={{ width: "848px", height: "450px", position: "relative",touchAction:"pan-y" }}>
                 <div style={{ display: "flex", height: "70%" }} className={styles.imgContainer}>
                     {/* {
                     IMG.map(item => {
